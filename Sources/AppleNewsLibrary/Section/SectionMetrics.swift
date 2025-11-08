@@ -60,5 +60,9 @@ public struct SectionMetrics: Codable, Sendable {
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
+        try container.encode(self.sectionId, forKey: .sectionId)
+        try container.encode(self.totalArticles, forKey: .totalArticles)
+        try container.encode(self.liveArticles, forKey: .liveArticles)
+        try container.encode(self.draftArticles, forKey: .draftArticles)
     }
 }
