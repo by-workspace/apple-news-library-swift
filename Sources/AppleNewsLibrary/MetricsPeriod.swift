@@ -12,7 +12,7 @@ public struct MetricsPeriod: Codable, Sendable {
     public let startDate: Date
     public let endDate: Date
     
-    init(startDate: Date, endDate: Date) {
+    public init(startDate: Date, endDate: Date) {
         self.startDate = startDate
         self.endDate = endDate
     }

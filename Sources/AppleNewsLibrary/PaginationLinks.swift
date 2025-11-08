@@ -13,7 +13,7 @@ public struct PaginationLinks: Codable, Sendable {
     public let next: String?
     public let prev: String?
     
-    public  init(selfLink: String, next: String? = nil, prev: String? = nil) {
+    public init(selfLink: String, next: String? = nil, prev: String? = nil) {
         self.`self` = selfLink
         self.next = next
         self.prev = prev

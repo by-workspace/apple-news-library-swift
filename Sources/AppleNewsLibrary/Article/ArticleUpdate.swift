@@ -20,6 +20,19 @@ public struct ArticleUpdate: Codable, Sendable {
     public let accessLevel: Article.AccessLevel?
     public let links: ArticleUpdateLinks?
     
+    enum CodingKeys: String, CodingKey {
+        case revision,
+             document,
+             metadata,
+             isPreview,
+             isSponsored,
+             isHidden,
+             isCandidateToBeFeatured,
+             maturityRating,
+             accessLevel,
+             links
+    }
+    
     public init(
         revision: String? = nil,
         document: Data? = nil,
@@ -42,6 +55,20 @@ public struct ArticleUpdate: Codable, Sendable {
         self.maturityRating = maturityRating
         self.accessLevel = accessLevel
         self.links = links
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.revision = try container.decodeIfPresent(String.self, forKey: .revision)
+        self.document = try container.decodeIfPresent(Data.self, forKey: .document)
+        self.metadata = try container.decodeIfPresent(ArticleMetadata.self, forKey: .metadata)
+        self.isPreview = try container.decodeIfPresent(Bool.self, forKey: .isPreview)
+        self.isSponsored = try container.decodeIfPresent(Bool.self, forKey: .isSponsored)
+        self.isHidden = try container.decodeIfPresent(Bool.self, forKey: .isHidden)
+        self.isCandidateToBeFeatured = try container.decodeIfPresent(Bool.self, forKey: .isCandidateToBeFeatured)
+        self.maturityRating = try container.decodeIfPresent(Article.MaturityRating.self, forKey: .maturityRating)
+        self.accessLevel = try container.decodeIfPresent(Article.AccessLevel.self, forKey: .accessLevel)
+        self.links = try container.decodeIfPresent(ArticleUpdateLinks.self, forKey: .links)
     }
 }
 

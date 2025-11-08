@@ -16,4 +16,11 @@ public struct AssetLinks: Codable, Sendable {
         self.`self` = "/assets/\(assetId)"
         self.article = "/articles/\(articleId)"
     }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.`self` = try container.decode(String.self, forKey: .self)
+        self.article = try container.decode(String.self, forKey: .article)
+    }
 }

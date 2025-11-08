@@ -26,4 +26,39 @@ public struct SectionMetrics: Codable, Sendable {
         case totalEngagements
         case period
     }
+    
+    public init(
+        sectionId: String,
+        totalArticles: Int,
+        liveArticles: Int,
+        draftArticles: Int,
+        totalImpressions: Int,
+        totalEngagements: Int,
+        period: MetricsPeriod
+    ) {
+        self.sectionId = sectionId
+        self.totalArticles = totalArticles
+        self.liveArticles = liveArticles
+        self.draftArticles = draftArticles
+        self.totalImpressions = totalImpressions
+        self.totalEngagements = totalEngagements
+        self.period = period
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.sectionId = try container.decode(String.self, forKey: .sectionId)
+        self.totalArticles = try container.decode(Int.self, forKey: .totalArticles)
+        self.liveArticles = try container.decode(Int.self, forKey: .liveArticles)
+        self.draftArticles = try container.decode(Int.self, forKey: .draftArticles)
+        self.totalImpressions = try container.decode(Int.self, forKey: .totalImpressions)
+        self.totalEngagements = try container.decode(Int.self, forKey: .totalEngagements)
+        self.period = try container.decode(MetricsPeriod.self, forKey: .period)
+    }
+    
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+    }
 }

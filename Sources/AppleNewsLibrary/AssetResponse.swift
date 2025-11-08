@@ -15,4 +15,8 @@ public struct AssetsResponse: Sendable, Codable {
 
 public struct ResponseMeta: Sendable, Codable {
     public let totalCount: Int
+    
+    public init(totalCount: Int) {
+        self.totalCount = totalCount
+    }
 }

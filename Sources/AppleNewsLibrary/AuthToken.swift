@@ -27,4 +27,13 @@ public struct AuthToken: Codable, Sendable {
         self.expiresIn = expiresIn
         self.scope = scope
     }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.accessToken = try container.decode(String.self, forKey: .accessToken)
+        self.tokenType = try container.decode(String.self, forKey: .tokenType)
+        self.expiresIn = try container.decode(Int.self, forKey: .expiresIn)
+        self.scope = try container.decodeIfPresent(String.self, forKey: .scope)
+    }
 }

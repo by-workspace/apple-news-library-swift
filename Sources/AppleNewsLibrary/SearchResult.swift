@@ -11,6 +11,11 @@ import Foundation
 public struct SearchResult: Codable, Sendable {
     public let data: [Article]
     public let meta: SearchMeta
+    
+    public init(data: [Article], meta: SearchMeta) {
+        self.data = data
+        self.meta = meta
+    }
 }
 
 /// Metadata about search results

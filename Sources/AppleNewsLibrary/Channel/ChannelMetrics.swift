@@ -26,5 +26,23 @@ public struct ChannelMetrics: Codable, Sendable {
         case totalEngagements
         case period
     }
+    
+    public init(
+        channelId: String,
+        totalArticles: Int,
+        liveArticles: Int,
+        draftArticles: Int,
+        totalImpressions: Int,
+        totalEngagements: Int,
+        period: MetricsPeriod
+    ) {
+        self.channelId = channelId
+        self.totalArticles = totalArticles
+        self.liveArticles = liveArticles
+        self.draftArticles = draftArticles
+        self.totalImpressions = totalImpressions
+        self.totalEngagements = totalEngagements
+        self.period = period
+    }
 }
 

@@ -22,4 +22,20 @@ public struct Asset: Codable, Sendable {
         case contentType
         case links
     }
+    
+    public init(id: String, size: Int, contentType: String, links: AssetLinks) {
+        self.id = id
+        self.size = size
+        self.contentType = contentType
+        self.links = links
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.id = try container.decode(String.self, forKey: .id)
+        self.size = try container.decode(Int.self, forKey: .size)
+        self.contentType = try container.decode(String.self, forKey: .contentType)
+        self.links = try container.decode(AssetLinks.self, forKey: .links)
+    }
 }

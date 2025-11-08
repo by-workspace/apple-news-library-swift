@@ -18,4 +18,12 @@ public struct CampaignData: Codable, Sendable {
         self.source = source
         self.medium = medium
     }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.source = try container.decodeIfPresent(String.self, forKey: .source)
+        self.medium = try container.decodeIfPresent(String.self, forKey: .medium)
+    }
 }

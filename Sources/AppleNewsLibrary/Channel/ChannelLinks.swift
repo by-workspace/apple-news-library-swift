@@ -12,8 +12,26 @@ public struct ChannelLinks: Codable, Sendable {
     public let `self`: String
     public let defaultSection: String?
     
+    enum CodingKeys: CodingKey {
+        case `self`
+        case defaultSection
+    }
+    
     public init(channelId: String, defaultSectionId: String? = nil) {
         self.`self` = "/channels/\(channelId)"
         self.defaultSection = defaultSectionId.map { "/sections/\($0)" }
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.`self` = try container.decode(String.self, forKey: .self)
+        self.defaultSection = try container.decodeIfPresent(String.self, forKey: .defaultSection)
+    }
+    
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.self, forKey: .self)
+        try container.encodeIfPresent(self.defaultSection, forKey: .defaultSection)
     }
 }

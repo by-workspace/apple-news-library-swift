@@ -14,4 +14,10 @@ public struct ArticleUpdateLinks: Codable, Sendable {
     public init(sectionIDs: [String]? = nil) {
         self.sections = sectionIDs?.map { "/sections/\($0)" }
     }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.sections = try container.decodeIfPresent([String].self, forKey: .sections)
+    }
 }
