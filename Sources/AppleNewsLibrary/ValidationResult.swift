@@ -8,7 +8,7 @@
 import Foundation
 
 /// Result of validating an article document
-public struct ValidationResult {
+public struct ValidationResult: Codable, Sendable {
     let isValid: Bool
     let warnings: [ArticleIssue]?
     let errors: [ArticleIssue]?

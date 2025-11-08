@@ -8,7 +8,7 @@
 import Foundation
 
 /// Metrics and analytics data for a channel
-public struct ChannelMetrics {
+public struct ChannelMetrics: Codable, Sendable {
     let channelId: String
     let totalArticles: Int
     let liveArticles: Int

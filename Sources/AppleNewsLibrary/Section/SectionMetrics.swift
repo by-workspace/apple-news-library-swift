@@ -8,7 +8,7 @@
 import Foundation
 
 /// Metrics and analytics data for a section
-public struct SectionMetrics {
+public struct SectionMetrics: Codable, Sendable {
     let sectionId: String
     let totalArticles: Int
     let liveArticles: Int

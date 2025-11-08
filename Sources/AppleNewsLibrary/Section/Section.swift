@@ -8,7 +8,7 @@
 import Foundation
 
 /// A section resource represents a section in a channel
-public struct Section {
+public struct Section: Codable, Sendable {
     let id: String
     let createdAt: Date
     let modifiedAt: Date

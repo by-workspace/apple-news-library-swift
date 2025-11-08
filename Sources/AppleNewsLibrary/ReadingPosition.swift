@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a user's reading position in an article
-public struct ReadingPosition {
+public struct ReadingPosition: Sendable, Codable {
     let articleId: String
     let position: Int
     let modifiedAt: Date

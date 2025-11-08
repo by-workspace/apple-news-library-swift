@@ -8,7 +8,7 @@
 import Foundation
 
 /// Response containing multiple assets
-public struct AssetsResponse {
+public struct AssetsResponse: Sendable, Codable {
     let data: [Asset]
     let meta: ResponseMeta?
 }
