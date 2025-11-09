@@ -5,7 +5,7 @@
 //  Created by Axel Martinez on 5/11/25.
 //
 
-public struct ArticleLinks: Codable, Sendable {
+public struct ArticleLinksResponse: Codable, Sendable {
     public let `self`: String
     public let channel: String
     public let sections: [String]
@@ -16,10 +16,10 @@ public struct ArticleLinks: Codable, Sendable {
         case sections
     }
     
-    public init(articleId: String, channelId: String, sectionIds: [String] = []) {
-        self.`self` = "/articles/\(articleId)"
-        self.channel = "/channels/\(channelId)"
-        self.sections = sectionIds.map { "/sections/\($0)" }
+    public init (self value: String, channel: String, sections: [String]) {
+        self.`self` = value
+        self.channel = channel
+        self.sections = sections
     }
     
     public init(from decoder: any Decoder) throws {

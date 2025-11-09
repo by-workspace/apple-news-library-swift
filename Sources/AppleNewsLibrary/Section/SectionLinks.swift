@@ -17,9 +17,9 @@ public struct SectionLinks: Codable, Sendable {
         case channel
     }
     
-    public init(sectionId: String, channelId: String) {
-        self.`self` = "/sections/\(sectionId)"
-        self.channel = "/channels/\(channelId)"
+    public init(self value: String, channel: String) {
+        self.`self` = value
+        self.channel = channel  
     }
     
     public init(from decoder: any Decoder) throws {
