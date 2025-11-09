@@ -10,14 +10,14 @@ import Foundation
 /// Response containing multiple channels
 public struct ChannelsResponse: Codable, Sendable {
     public let data: [Channel]
-    public let meta: ResponseMeta?
+    public let meta: Meta?
 
     enum CodingKeys: CodingKey {
         case data
         case meta
     }
     
-    public init(data: [Channel], meta: ResponseMeta? = nil) {
+    public init(data: [Channel], meta: Meta? = nil) {
         self.data = data
         self.meta = meta
     }
@@ -26,11 +26,12 @@ public struct ChannelsResponse: Codable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
          
         self.data = try container.decode([Channel].self, forKey: .data)
-        self.meta = try container.decodeIfPresent(ResponseMeta.self, forKey: .meta)
+        self.meta = try container.decodeIfPresent(Meta.self, forKey: .meta)
     }
     
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        
         try container.encode(self.data, forKey: .data)
         try container.encodeIfPresent(self.meta, forKey: .meta)
     }

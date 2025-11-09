@@ -7,12 +7,12 @@
 
 /// An individual API error
 public struct Warning: Codable, Sendable {
-    public let code: String
-    public let keyPath: String?
+    public let message: String
+    public let keyPath: [String]?
     public let value: String?
     
-    public init(code: String, keyPath: String? = nil, value: String? = nil) {
-        self.code = code
+    public init(message: String, keyPath: [String]? = nil, value: String? = nil) {
+        self.message = message
         self.keyPath = keyPath
         self.value = value
     }

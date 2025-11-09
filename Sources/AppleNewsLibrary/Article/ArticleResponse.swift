@@ -10,9 +10,9 @@ import Foundation
 /// Response containing multiple articles
 public struct ArticlesResponse: Codable, Sendable {
     public let data: [Article]
-    public let meta: ResponseMeta?
+    public let meta: Meta?
     
-    public init(data: [Article], meta: ResponseMeta?) {
+    public init(data: [Article], meta: Meta?) {
         self.data = data
         self.meta = meta
     }
@@ -21,6 +21,6 @@ public struct ArticlesResponse: Codable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.data = try container.decode([Article].self, forKey: .data)
-        self.meta = try container.decodeIfPresent(ResponseMeta.self, forKey: .meta)
+        self.meta = try container.decodeIfPresent(Meta.self, forKey: .meta)
     }
 }

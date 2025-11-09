@@ -21,11 +21,13 @@ public struct ErrorResponse: Codable, Sendable, Swift.Error {
     
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.errors = try container.decode([Error].self, forKey: .errors)   
+        
+        self.errors = try container.decode([Error].self, forKey: .errors)
     }
     
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        
         try container.encode(self.errors, forKey: .errors)
     }
 }
