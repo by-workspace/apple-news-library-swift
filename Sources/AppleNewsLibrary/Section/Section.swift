@@ -9,7 +9,7 @@ import Foundation
 
 /// A section resource represents a section in a channel
 public struct Section: Codable, Sendable {
-    public let id: String
+    public let id: UUID
     public let createdAt: Date
     public let modifiedAt: Date
     public let name: String
@@ -21,7 +21,7 @@ public struct Section: Codable, Sendable {
     }
     
     public init(
-        id: String,
+        id: UUID,
         createdAt: Date,
         modifiedAt: Date,
         name: String,
@@ -39,7 +39,7 @@ public struct Section: Codable, Sendable {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.id = try container.decode(String.self, forKey: .id)
+        self.id = try container.decode(UUID.self, forKey: .id)
         self.createdAt = try container.decode(Date.self, forKey: .createdAt)
         self.modifiedAt = try container.decode(Date.self, forKey: .modifiedAt)
         self.name = try container.decode(String.self, forKey: .name)
