@@ -15,7 +15,7 @@ public struct Channel: Codable, Sendable {
     public let modifiedAt: Date
     public let name: String
     public let website: String?
-    public let defaultSectionId: String?
+    public let fonts: String?
     public let shareUrl: String?
     public let links: ChannelLinks
     
@@ -26,7 +26,7 @@ public struct Channel: Codable, Sendable {
         case modifiedAt
         case name
         case website
-        case defaultSectionId
+        case fonts
         case shareUrl
         case links
     }
@@ -37,7 +37,7 @@ public struct Channel: Codable, Sendable {
         modifiedAt: Date,
         name: String,
         website: String?,
-        defaultSectionId: String?,
+        fonts: String?,
         shareUrl: String?,
         links: ChannelLinks
     ) {
@@ -46,7 +46,7 @@ public struct Channel: Codable, Sendable {
         self.modifiedAt = modifiedAt
         self.name = name
         self.website = website
-        self.defaultSectionId = defaultSectionId
+        self.fonts = fonts
         self.shareUrl = shareUrl
         self.links = links
     }
@@ -59,7 +59,7 @@ public struct Channel: Codable, Sendable {
         self.modifiedAt = try container.decode(Date.self, forKey: .modifiedAt)
         self.name = try container.decode(String.self, forKey: .name)
         self.website = try container.decodeIfPresent(String.self, forKey: .website)
-        self.defaultSectionId = try container.decodeIfPresent(String.self, forKey: .defaultSectionId)
+        self.fonts = try container.decodeIfPresent(String.self, forKey: .fonts)
         self.shareUrl = try container.decodeIfPresent(String.self, forKey: .shareUrl)
         self.links = try container.decode(ChannelLinks.self, forKey: .links)
     }
@@ -70,6 +70,11 @@ public struct Channel: Codable, Sendable {
         try container.encode(self.id, forKey: .id)
         try container.encode(self.createdAt, forKey: .createdAt)
         try container.encode(self.modifiedAt, forKey: .modifiedAt)
+        try container.encode(self.name, forKey: .name)
+        try container.encodeIfPresent(self.website, forKey: .website)
+        try container.encodeIfPresent(self.fonts, forKey: .fonts)
+        try container.encodeIfPresent(self.shareUrl ,forKey: .shareUrl)
+        try container.encodeIfPresent(self.links,  forKey: .links)
     }
 }
 
