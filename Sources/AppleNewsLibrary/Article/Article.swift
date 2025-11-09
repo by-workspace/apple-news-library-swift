@@ -14,7 +14,7 @@ public struct Article: Sendable, Codable {
     public let modifiedAt: Date
     public let shareURL: String
     public let revision: String
-    public let document: Data
+    public let document: String
     public let state: State
     public let accessLevel: AccessLevel?
     public let maturityRating: MaturityRating?
@@ -76,7 +76,7 @@ public struct Article: Sendable, Codable {
         modifiedAt: Date,
         shareURL: String,
         revision: String,
-        document: Data,
+        document: String,
         state: State,
         accessLevel: AccessLevel?,
         maturityRating: MaturityRating?,
@@ -115,7 +115,7 @@ public struct Article: Sendable, Codable {
         self.modifiedAt = try container.decode(Date.self, forKey: .modifiedAt)
         self.shareURL = try container.decode(String.self, forKey: .shareURL)
         self.revision = try container.decode(String.self, forKey: .revision)
-        self.document = try container.decode(Data.self, forKey: .document)
+        self.document = try container.decode(String.self, forKey: .document)
         self.state = try container.decode(Article.State.self, forKey: .state)
         self.accessLevel = try container.decodeIfPresent(Article.AccessLevel.self, forKey: .accessLevel)
         self.maturityRating = try container.decodeIfPresent(Article.MaturityRating.self, forKey: .maturityRating)
