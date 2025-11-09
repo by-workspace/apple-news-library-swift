@@ -23,7 +23,7 @@ public struct Article: Sendable, Codable {
     public let isHidden: Bool
     public let isCandidateToBeFeatured: Bool
     public let isPaid: Bool
-    public let links: ArticleLinks
+    public let links: ArticleLinksResponse
     
     // Metadata
     public let title: String
@@ -85,7 +85,7 @@ public struct Article: Sendable, Codable {
         isHidden: Bool,
         isCandidateToBeFeatured: Bool,
         isPaid: Bool,
-        links: ArticleLinks,
+        links: ArticleLinksResponse,
         title: String,
         excerpt: String?
     ) {
@@ -124,7 +124,7 @@ public struct Article: Sendable, Codable {
         self.isHidden = try container.decode(Bool.self, forKey: .isHidden)
         self.isCandidateToBeFeatured = try container.decode(Bool.self, forKey: .isCandidateToBeFeatured)
         self.isPaid = try container.decode(Bool.self, forKey: .isPaid)
-        self.links = try container.decode(ArticleLinks.self, forKey: .links)
+        self.links = try container.decode(ArticleLinksResponse.self, forKey: .links)
         self.title = try container.decode(String.self, forKey: .title)
         self.excerpt = try container.decodeIfPresent(String.self, forKey: .excerpt)
     }

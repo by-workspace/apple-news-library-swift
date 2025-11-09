@@ -17,9 +17,9 @@ public struct ChannelLinks: Codable, Sendable {
         case defaultSection
     }
     
-    public init(channelId: String, defaultSectionId: String? = nil) {
-        self.`self` = "/channels/\(channelId)"
-        self.defaultSection = defaultSectionId.map { "/sections/\($0)" }
+    public init (self value: String,defaultSection: String? = nil) {
+        self.`self` = value
+        self.defaultSection = defaultSection
     }
     
     public init(from decoder: any Decoder) throws {
