@@ -8,7 +8,7 @@
 import Foundation
 
 /// A search result containing articles matching the query
-public struct SearchResult: Codable, Sendable {
+public struct SearchResponse: Codable, Sendable {
     public let articles: [Article]
     public let links: ArticleLinksResponse?
     public let meta: SearchMeta
