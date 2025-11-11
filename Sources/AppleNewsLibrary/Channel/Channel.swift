@@ -27,7 +27,6 @@ public struct Channel: Codable, Sendable {
         case website
         case fonts
         case shareUrl
-        case links
     }
     
     public init(
@@ -37,8 +36,7 @@ public struct Channel: Codable, Sendable {
         name: String,
         website: String?,
         fonts: String?,
-        shareUrl: String?,
-        links: ChannelLinks
+        shareUrl: String?
     ) {
         self.id = id
         self.createdAt = createdAt
