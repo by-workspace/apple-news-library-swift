@@ -114,7 +114,6 @@ public struct Article: Sendable, Codable {
         self.revision = try container.decode(String.self, forKey: .revision)
         self.document = try container.decode(String.self, forKey: .document)
         self.state = try container.decode(Article.State.self, forKey: .state)
-        self.document = try container.decodeIfPresent(String.self, forKey: .document)
         self.accessLevel = try container.decodeIfPresent(Article.AccessLevel.self, forKey: .accessLevel)
         self.maturityRating = try container.decodeIfPresent(Article.MaturityRating.self, forKey: .maturityRating)
         self.isSponsored = try container.decode(Bool.self, forKey: .isSponsored)
