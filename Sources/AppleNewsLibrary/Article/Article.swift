@@ -14,7 +14,7 @@ public struct Article: Sendable, Codable {
     public let modifiedAt: Date
     public let shareURL: String
     public let revision: String
-    public let document: Data
+    public let document: String?
     public let state: State
     public let accessLevel: AccessLevel?
     public let maturityRating: MaturityRating?
@@ -23,7 +23,6 @@ public struct Article: Sendable, Codable {
     public let isHidden: Bool
     public let isCandidateToBeFeatured: Bool
     public let isPaid: Bool
-    public let links: ArticleLinksResponse
     
     // Metadata
     public let title: String
@@ -76,7 +75,7 @@ public struct Article: Sendable, Codable {
         modifiedAt: Date,
         shareURL: String,
         revision: String,
-        document: Data,
+        document: String?,
         state: State,
         accessLevel: AccessLevel?,
         maturityRating: MaturityRating?,
@@ -85,7 +84,6 @@ public struct Article: Sendable, Codable {
         isHidden: Bool,
         isCandidateToBeFeatured: Bool,
         isPaid: Bool,
-        links: ArticleLinksResponse,
         title: String,
         excerpt: String?
     ) {
@@ -103,7 +101,6 @@ public struct Article: Sendable, Codable {
         self.isHidden = isHidden
         self.isCandidateToBeFeatured = isCandidateToBeFeatured
         self.isPaid = isPaid
-        self.links = links
         self.title = title
         self.excerpt = excerpt
     }
@@ -115,8 +112,8 @@ public struct Article: Sendable, Codable {
         self.modifiedAt = try container.decode(Date.self, forKey: .modifiedAt)
         self.shareURL = try container.decode(String.self, forKey: .shareURL)
         self.revision = try container.decode(String.self, forKey: .revision)
-        self.document = try container.decode(Data.self, forKey: .document)
         self.state = try container.decode(Article.State.self, forKey: .state)
+        self.document = try container.decodeIfPresent(String.self, forKey: .document)
         self.accessLevel = try container.decodeIfPresent(Article.AccessLevel.self, forKey: .accessLevel)
         self.maturityRating = try container.decodeIfPresent(Article.MaturityRating.self, forKey: .maturityRating)
         self.isSponsored = try container.decode(Bool.self, forKey: .isSponsored)
@@ -124,7 +121,6 @@ public struct Article: Sendable, Codable {
         self.isHidden = try container.decode(Bool.self, forKey: .isHidden)
         self.isCandidateToBeFeatured = try container.decode(Bool.self, forKey: .isCandidateToBeFeatured)
         self.isPaid = try container.decode(Bool.self, forKey: .isPaid)
-        self.links = try container.decode(ArticleLinksResponse.self, forKey: .links)
         self.title = try container.decode(String.self, forKey: .title)
         self.excerpt = try container.decodeIfPresent(String.self, forKey: .excerpt)
     }
@@ -147,7 +143,6 @@ public struct Article: Sendable, Codable {
         try container.encode(self.isHidden, forKey: .isHidden)
         try container.encode(self.isCandidateToBeFeatured, forKey: .isCandidateToBeFeatured)
         try container.encode(self.isPaid, forKey: .isPaid)
-        try container.encode(self.links, forKey: .links)
         try container.encode(self.title, forKey: .title)
         try container.encodeIfPresent(self.excerpt, forKey: .excerpt)
     }
