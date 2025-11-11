@@ -7,8 +7,8 @@
 
 import Foundation
 
-/// Response containing multiple sections
-public struct SectionResponse {
+/// Response containing a single section
+public struct SectionResponse: Codable, Sendable {
     public let section: Section
     public let links: SectionLinks?
     
@@ -38,3 +38,4 @@ public struct SectionResponse {
         try links?.encode(to: dataEncoder)
     }
 }
+
