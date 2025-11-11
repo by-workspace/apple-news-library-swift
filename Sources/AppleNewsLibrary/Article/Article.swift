@@ -112,6 +112,7 @@ public struct Article: Sendable, Codable {
         self.modifiedAt = try container.decode(Date.self, forKey: .modifiedAt)
         self.shareURL = try container.decode(String.self, forKey: .shareURL)
         self.revision = try container.decode(String.self, forKey: .revision)
+        self.document = try container.decode(String.self, forKey: .document)
         self.state = try container.decode(Article.State.self, forKey: .state)
         self.document = try container.decodeIfPresent(String.self, forKey: .document)
         self.accessLevel = try container.decodeIfPresent(Article.AccessLevel.self, forKey: .accessLevel)
