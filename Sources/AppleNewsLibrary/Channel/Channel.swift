@@ -17,7 +17,6 @@ public struct Channel: Codable, Sendable {
     public let website: String?
     public let fonts: String?
     public let shareUrl: String?
-    public let links: ChannelLinks
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -48,7 +47,6 @@ public struct Channel: Codable, Sendable {
         self.website = website
         self.fonts = fonts
         self.shareUrl = shareUrl
-        self.links = links
     }
     
     public init(from decoder: any Decoder) throws {
@@ -61,7 +59,6 @@ public struct Channel: Codable, Sendable {
         self.website = try container.decodeIfPresent(String.self, forKey: .website)
         self.fonts = try container.decodeIfPresent(String.self, forKey: .fonts)
         self.shareUrl = try container.decodeIfPresent(String.self, forKey: .shareUrl)
-        self.links = try container.decode(ChannelLinks.self, forKey: .links)
     }
     
     public func encode(to encoder: any Encoder) throws {
@@ -74,7 +71,6 @@ public struct Channel: Codable, Sendable {
         try container.encodeIfPresent(self.website, forKey: .website)
         try container.encodeIfPresent(self.fonts, forKey: .fonts)
         try container.encodeIfPresent(self.shareUrl ,forKey: .shareUrl)
-        try container.encodeIfPresent(self.links,  forKey: .links)
     }
 }
 

@@ -8,31 +8,33 @@
 import Foundation
  
 /// Response containing multiple channels
-public struct ChannelsResponse: Codable, Sendable {
-    public let data: [Channel]
-    public let meta: Meta?
+public struct ChannelResponse: Codable, Sendable {
+    public let channel: Channel
+    public let links: ChannelLinks?
 
     enum CodingKeys: CodingKey {
         case data
-        case meta
     }
     
-    public init(data: [Channel], meta: Meta? = nil) {
-        self.data = data
-        self.meta = meta
+    public init(channel: Channel, links: ChannelLinks? = nil) {
+        self.channel = channel
+        self.links = links
     }
     
-    public init(from decoder: any Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-         
-        self.data = try container.decode([Channel].self, forKey: .data)
-        self.meta = try container.decodeIfPresent(Meta.self, forKey: .meta)
+        let dataDecoder = try container.superDecoder(forKey: .data)
+        
+        self.channel = try Channel(from: dataDecoder)
+        self.links = try? ChannelLinks(from: dataDecoder)
     }
     
-    public func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(self.data, forKey: .data)
-        try container.encodeIfPresent(self.meta, forKey: .meta)
+        let dataEncoder = container.superEncoder(forKey: .data)
+        
+        try channel.encode(to: dataEncoder)
+        try links?.encode(to: dataEncoder)
     }
 }
