@@ -16,7 +16,11 @@ public struct Section: Codable, Sendable {
     public let isDefault: Bool
     
     enum CodingKeys: String, CodingKey {
-        case id, createdAt, modifiedAt, name, isDefault, links
+        case id
+        case createdAt
+        case modifiedAt
+        case name
+        case isDefault
     }
     
     public init(
