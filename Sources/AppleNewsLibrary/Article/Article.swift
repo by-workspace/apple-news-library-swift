@@ -111,7 +111,15 @@ public struct Article: Sendable, Codable {
         self.shareURL = try container.decode(String.self, forKey: .shareURL)
         self.revision = try container.decode(String.self, forKey: .revision)
         self.state = try container.decode(Article.State.self, forKey: .state)
-        self.document = try container.decodeIfPresent(Data.self, forKey: .document)
+        
+        // Decode document dictionary and convert to Data
+        if let anyDoc = try? container.decode(AnyCodable.self, forKey: .document),
+           let dict = anyDoc.value as? [String: Any] {
+            self.document = try JSONSerialization.data(withJSONObject: dict, options: [])
+        } else {
+            self.document = nil
+        }
+        
         self.accessLevel = try container.decodeIfPresent(Article.AccessLevel.self, forKey: .accessLevel)
         self.maturityRating = try container.decodeIfPresent(Article.MaturityRating.self, forKey: .maturityRating)
         self.links = try container.decode(ArticleLinksResponse.self, forKey: .links)
@@ -132,7 +140,13 @@ public struct Article: Sendable, Codable {
         try container.encode(self.modifiedAt, forKey: .modifiedAt)
         try container.encode(self.shareURL, forKey: .shareURL)
         try container.encode(self.revision, forKey: .revision)
-        try container.encode(self.document, forKey: .document)
+        
+        // Encode document Data back as JSON object
+        if let documentData = self.document,
+           let jsonObject = try? JSONSerialization.jsonObject(with: documentData, options: []) {
+            try container.encode(AnyCodable(value: jsonObject), forKey: .document)
+        }
+        
         try container.encode(self.state, forKey: .state)
         try container.encodeIfPresent(self.accessLevel, forKey: .accessLevel)
         try container.encodeIfPresent(self.maturityRating, forKey: .maturityRating)
