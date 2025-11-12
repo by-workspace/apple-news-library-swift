@@ -63,6 +63,7 @@ public struct Channel: Codable, Sendable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(self.id, forKey: .id)
+        try container.encode(self.type, forKey: .type)
         try container.encode(self.createdAt, forKey: .createdAt)
         try container.encode(self.modifiedAt, forKey: .modifiedAt)
         try container.encode(self.name, forKey: .name)
