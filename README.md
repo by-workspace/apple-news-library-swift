@@ -1,4 +1,4 @@
-# Apple News Library - Swift
+# Apple News Server Library - Swift
 
 The Swift server library for the [Apple News API](https://developer.apple.com/documentation/apple_news).
 
